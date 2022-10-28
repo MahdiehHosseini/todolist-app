@@ -26,7 +26,7 @@ function AddHabitPopup () {
 			<form onSubmit={()=>dispatch(addHabit({ id : Math.random() , title : title , startTime : `${startTime.hour}-${startTime.minute}` , endTime : `${endTime.hour}-${endTime.minute}` , reminder : reminder , addDate : `${new Date().getFullYear()}-${`${new Date().getMonth()+1}`.padStart(2, '0')}-${`${new Date().getDate()}`.padStart(2, '0')}`}))} className='mx-9 flex flex-col relative h-full'>
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} value={title} onChange={(e)=>setTitle(e.target.value)} type='text' placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 text-center`}>
-					<Provider theme={theme} colorScheme="light" zIndex={100} position={'relative'}>
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
 						<View
 							backgroundColor="static-white"
 						>

@@ -27,7 +27,7 @@ function AddGoalPopup () {
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} value={title} onChange={(e)=>setTitle(e.target.value)} type='text' placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 my-5 flex flex-col text-center`}>
 					<label className='font-medium text-lg mb-1'>reach date :</label>
-					<Provider theme={theme} colorScheme="light" zIndex={100} position={'relative'}>
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
 						<View
 							backgroundColor="static-white"
 						>

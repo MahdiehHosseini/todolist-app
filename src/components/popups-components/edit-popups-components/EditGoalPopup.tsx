@@ -30,7 +30,7 @@ function EditGoalPopup () {
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} type='text' value={title} onChange={(e)=>setTitle(e.target.value)} placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 my-5 text-center flex flex-col items-center justify-around`}>
 					<label className=' text-lg font-medium text-center mb-1'>reach date</label>
-					<Provider theme={theme} colorScheme="light" zIndex={100} position={'relative'}>
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
 						<View
 							backgroundColor="static-white"
 						>

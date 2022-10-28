@@ -31,7 +31,7 @@ function EditTaskPopup () {
 			<form onSubmit={()=>dispatch(editTask({ id : taskId , title : title , startTime : `${startTime.hour}-${startTime.minute}` , endTime : `${endTime.hour}-${endTime.minute}` , reminder : theTask.reminder , autoDone : theTask.autoDone , date : `${date}` , listId : theTask.listId , goalId : theTask.goalId , done : theTask.done}))} className='mx-9 flex flex-col relative h-full'>
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} placeholder='title' value={title} onChange={(e)=>setTitle(e.target.value)} type='text' />
 				<div className={`border-b border-[${them}] p-3 my-5 text-center`}>
-					<Provider theme={theme} colorScheme="light" zIndex={100} position={'fixed'}>
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
 						<View
 							backgroundColor="static-white"
 						>

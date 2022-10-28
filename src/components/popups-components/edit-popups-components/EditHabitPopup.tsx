@@ -29,7 +29,7 @@ function EditHabitPopup () {
 			<form onSubmit={()=>dispatch(editHabit({ id : habitId , title : title , startTime : `${startTime.hour}-${startTime.minute}` , endTime : `${endTime.hour}-${endTime.minute}` , reminder : theHabit.reminder , addDate : theHabit.addDate}))} className='mx-9 flex flex-col relative h-full'>
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-xl placeholder:font-semibold`} type='text' value={title} onChange={(e)=>setTitle(e.target.value)} placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 text-center`}>
-					<Provider theme={theme} colorScheme="light" zIndex={100} position={'relative'}>
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
 						<View
 							backgroundColor="static-white"
 						>
