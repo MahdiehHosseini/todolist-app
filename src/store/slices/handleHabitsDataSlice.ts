@@ -13,8 +13,8 @@ const initialState: HabitInterface[] = [{
 },{
 	id : 6 ,
 	title : 'new' ,
-	startTime : '8-5' ,
-	endTime : '3-8' ,
+	startTime : '3-5' ,
+	endTime : '8-8' ,
 	reminder : false ,
 	addDate : '2022-09-06'
 }]

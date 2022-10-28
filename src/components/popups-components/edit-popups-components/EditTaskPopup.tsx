@@ -22,8 +22,8 @@ function EditTaskPopup () {
 	const theTask = tasks.filter(task => task.id === taskId)[0]
 	const [title , setTitle] = useState<string>(theTask.title)
 	const [date , setDate] = useState(parseDate(theTask.date))
-	const [startTime , setStartTime] = useState({ hour : theTask.startTime.split('-')[0] , minute : theTask.startTime.split('-')[1] , second : 0 , millisecond : 0 })
-	const [endTime , setEndTime] = useState({ hour : theTask.endTime.split('-')[0] , minute : theTask.endTime.split('-')[1] , second : 0 , millisecond : 0 })
+	const [startTime , setStartTime] = useState({ hour : parseInt(theTask.startTime.split('-')[0]) , minute : parseInt(theTask.startTime.split('-')[1]) , second : 0 , millisecond : 0 })
+	const [endTime , setEndTime] = useState({ hour : parseInt(theTask.endTime.split('-')[0]) , minute : parseInt(theTask.endTime.split('-')[1]) , second : 0 , millisecond : 0 })
 	return (
 		<div className=" h-auto pb-12 bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl">
 			<i onClick={()=>dispatch(toggleState('none'))} className='material-icons cursor-pointer text-2xl float-right mt-5 mr-6'>close</i>
@@ -31,7 +31,7 @@ function EditTaskPopup () {
 			<form onSubmit={()=>dispatch(editTask({ id : taskId , title : title , startTime : `${startTime.hour}-${startTime.minute}` , endTime : `${endTime.hour}-${endTime.minute}` , reminder : theTask.reminder , autoDone : theTask.autoDone , date : `${date}` , listId : theTask.listId , goalId : theTask.goalId , done : theTask.done}))} className='mx-9 flex flex-col relative h-full'>
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} placeholder='title' value={title} onChange={(e)=>setTitle(e.target.value)} type='text' />
 				<div className={`border-b border-[${them}] p-3 my-5 text-center`}>
-					<Provider theme={theme} colorScheme="light">
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'fixed'}>
 						<View
 							backgroundColor="static-white"
 						>

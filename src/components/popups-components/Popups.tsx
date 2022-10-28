@@ -26,7 +26,7 @@ function Popups() {
 		})
 	} , [])
 	return (
-		<div id='popup' className=' absolute h-screen w-full bg-black/50 z-20 flex items-center justify-center'>
+		<div id='popup' className=' absolute h-screen w-full bg-black/50 z-30 flex items-center justify-center'>
 			{state === 'notifications' && <NotificationsPopup />}
 			{state === 'add' && <AddPopup />}
 			{state === 'addTask' && <AddTaskPopup />}

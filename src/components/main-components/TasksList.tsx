@@ -49,9 +49,9 @@ const TasksList: FC<TasksListComponentInterface> = ({title ,addOption,tasksData}
 					{addOption && <i onClick={()=>addOption && title.includes('goal') ? dispatch(toggleState('addGoal')) : dispatch(toggleState('addTask'))} className={`cursor-pointer material-icons text-[${them}] text-2xl`}>add</i>}
 					<p className={` font-semibold text-[${them}] text-xl ml-1 ${addOption && 'cursor-pointer'}`}>{title}</p>
 				</span>
-				<p id='options' onClick={()=>setShowOptions(!showOptions)} className=' cursor-pointer text-xl font-semibold z-10'>...</p>
+				<p id='options' onClick={()=>setShowOptions(!showOptions)} className=' cursor-pointer text-xl font-semibold z-20'>...</p>
 			</span>
-			{showOptions && <span id='options' className={`absolute bg-white border border-[${them}] rounded-xl p-5 top-0 -right-3`}>
+			{showOptions && <span id='options' className={`absolute bg-white z-10 border border-[${them}] rounded-xl p-5 top-0 -right-3`}>
 				<p onClick={()=>{setSortByTime(!sortByTime) 
 					setShowOptions(false)}} className=' font-medium text-lg my-2 cursor-pointer'>sort by time</p>
 				<p onClick={()=>{setShowDoneTasks(!showDoneTasks) 

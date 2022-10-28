@@ -20,8 +20,8 @@ function EditHabitPopup () {
 	const habitId =  parseInt(url.split('/')[2])
 	const theHabit = habits.filter(habit => habit.id === habitId)[0]
 	const [title , setTitle] = useState<string>(theHabit.title)
-	const [startTime , setStartTime] = useState({ hour : theHabit.startTime.split('-')[0] , minute : theHabit.startTime.split('-')[1] , second : 0 , millisecond : 0 })
-	const [endTime , setEndTime] = useState({ hour : theHabit.endTime.split('-')[0] , minute : theHabit.endTime.split('-')[1] , second : 0 , millisecond : 0 })
+	const [startTime , setStartTime] = useState({ hour : parseInt(theHabit.startTime.split('-')[0]) , minute : parseInt(theHabit.startTime.split('-')[1]) , second : 0 , millisecond : 0 })
+	const [endTime , setEndTime] = useState({ hour : parseInt(theHabit.endTime.split('-')[0]) , minute : parseInt(theHabit.endTime.split('-')[1]) , second : 0 , millisecond : 0 })
 	return (
 		<div className="  h-auto pb-14 bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl">
 			<i onClick={()=>dispatch(toggleState('none'))} className='material-icons cursor-pointer text-2xl float-right mt-5 mr-6'>close</i>
@@ -29,7 +29,7 @@ function EditHabitPopup () {
 			<form onSubmit={()=>dispatch(editHabit({ id : habitId , title : title , startTime : `${startTime.hour}-${startTime.minute}` , endTime : `${endTime.hour}-${endTime.minute}` , reminder : theHabit.reminder , addDate : theHabit.addDate}))} className='mx-9 flex flex-col relative h-full'>
 				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-xl placeholder:font-semibold`} type='text' value={title} onChange={(e)=>setTitle(e.target.value)} placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 text-center`}>
-					<Provider theme={theme} colorScheme="light">
+					<Provider theme={theme} colorScheme="light" zIndex={100} position={'relative'}>
 						<View
 							backgroundColor="static-white"
 						>
