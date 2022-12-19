@@ -1,5 +1,5 @@
 //import pakages
-import { useState } from 'react'
+import { useState,useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {DatePicker } from '@react-spectrum/datepicker'
 import {Provider} from '@react-spectrum/provider'
@@ -13,7 +13,7 @@ import { toggleState } from '../../../store/slices/toggleSlice'
 import { addGoal } from '../../../store/slices/handleGoalsDataSlice'
 
 function AddGoalPopup () {
-	const [title , setTitle] = useState<string>('')
+	const title = useRef(null)
 	const [autoReach , setAutoReach] = useState<boolean>(false)
 	const them = useSelector((state:RootState)=> state.handleThem)
 	const [date , setDate] = useState(parseDate(`${new Date().getFullYear()}-${`${new Date().getMonth()+1}`.padStart(2, '0')}-${`${new Date().getDate()}`.padStart(2, '0')}`))
@@ -23,8 +23,22 @@ function AddGoalPopup () {
 		<div className=" h-auto bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl pb-12">
 			<i onClick={()=>dispatch(toggleState('none'))} className='material-icons cursor-pointer text-2xl float-right mt-5 mr-6'>close</i>
 			<h5 className={`text-center mt-16 mb-6 text-xl text-[${them}] font-semibold`}>add goal</h5>
-			<form onSubmit={()=>dispatch(addGoal({ id : Math.random() , title : title , term : term , autoReach : autoReach , reachDate : `${date}` , tasks : []}))} className='mx-9 flex flex-col relative h-full'>
-				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} value={title} onChange={(e)=>setTitle(e.target.value)} type='text' placeholder='title' />
+			<form onSubmit={(event)=>{
+                                dispatch(
+                                 addGoal({ 
+                                  id : Math.random() , 
+                                  title : title.current.value , 
+                                  term : term , 
+                                  autoReach : autoReach , 
+                                  reachDate : `${date}` , 
+                                  tasks : []
+                                  })
+                                 )
+                                alert('your goal has been seted')
+                                event.preventDefault()
+}
+                                className='mx-9 flex flex-col relative h-full'>
+				<input className={`border-b border-[${them}] py-3 focus:outline-none placeholder:text-lg placeholder:font-medium`} ref={title} type='text' placeholder='title' />
 				<div className={`border-b border-[${them}] p-3 my-5 flex flex-col text-center`}>
 					<label className='font-medium text-lg mb-1'>reach date :</label>
 					<Provider theme={theme} colorScheme="light" zIndex={100} position={'sticky'}>
