@@ -1,7 +1,7 @@
 // import pakages
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import types & interfaces
-import { ListInterface } from './../../types-&-interfaces/Interfaces'
+import { ListInterface } from '../../Interfaces/Interfaces'
 
 const initialState: ListInterface[] = [{
 	id : 24 ,

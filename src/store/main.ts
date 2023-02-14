@@ -1,4 +1,4 @@
-import { configureStore,combineReducers } from '@reduxjs/toolkit'
+import { configureStore,combineReducers,getDefaultMiddleware } from '@reduxjs/toolkit'
 import { persistStore , persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import toggleReducer from './slices/toggleSlice'
@@ -7,9 +7,8 @@ import handleHabitsDataReducer from './slices/handleHabitsDataSlice'
 import handleGoalsDataReducer from './slices/handleGoalsDataSlice'
 import handleListsDataReducer from './slices/handleListsDataSlice'
 import dateReducer from './slices/dateSlice'
-import subReducers from './slices/subReducersSlice'
 import timeLineReducer from './slices/timeLineData'
-import handleThemReducer from './slices/handleThem'
+import handleThemeReducer from './slices/handleTheme'
 const rootReducer = combineReducers({
 	toggle: toggleReducer ,
 	handleTasksData: handleTasksDataReducer ,
@@ -17,9 +16,8 @@ const rootReducer = combineReducers({
 	handleGoalsData: handleGoalsDataReducer ,
 	handleListsData: handleListsDataReducer ,
 	date: dateReducer ,
-	subData: subReducers,
 	timeLine: timeLineReducer ,
-	handleThem: handleThemReducer
+	handleTheme: handleThemeReducer
 })
 const persistConfig = {
 	key: 'root',
@@ -28,7 +26,10 @@ const persistConfig = {
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({
-	reducer: persistedReducer
+	reducer: persistedReducer,
+	middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+		serializableCheck: false
+	})
 })
 export const persistor = persistStore(store)
 

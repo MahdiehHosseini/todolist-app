@@ -1,26 +1,38 @@
 // import pakages
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import types & interfaces
-import { GoalInterface } from './../../types-&-interfaces/Interfaces'
+import { GoalInterface } from '../../Interfaces/Interfaces'
 
 const initialState: GoalInterface[] = [{
 	id : 24 ,
 	title : 'a goal' ,
-	reachDate : '2022-08-31' ,
-	term : 'short' ,
+	reachDate : {
+		year: 2023,
+		month: 2,
+		date: 10
+	} ,
+	term : 'long' ,
 	autoReach : false ,
 	tasks : []
 },{
 	id : 45 ,
 	title : 'a goal' ,
-	reachDate : '2022-08-31',
+	reachDate : {
+		year: 2023,
+		month: 2,
+		date: 1
+	},
 	term : 'short' ,
-	autoReach : false ,
+	autoReach : true ,
 	tasks : []
 },{
-	id : 27 ,
+	id : 25 ,
 	title : 'a goal' ,
-	reachDate : '2022-08-31',
+	reachDate : {
+		year: 2023,
+		month: 2,
+		date: 10
+	},
 	term : 'short' ,
 	autoReach : false ,
 	tasks : []

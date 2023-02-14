@@ -1,22 +1,42 @@
 // import pakages
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import types & interfaces
-import { HabitInterface } from './../../types-&-interfaces/Interfaces'
+import { HabitInterface } from '../../Interfaces/Interfaces'
 
 const initialState: HabitInterface[] = [{
 	id : 5 ,
 	title : 'exercise' ,
-	startTime : '2-5' ,
-	endTime : '3-8' ,
+	startTime : {
+		hour: 12,
+		minutes: 3
+	} ,
+	endTime : {
+		hour: 14,
+		minutes: 3
+	} ,
 	reminder : true ,
-	addDate : '2022-04-06'
+	addDate : {
+		year: 2023,
+		month: 2,
+		date: 1
+	}
 },{
 	id : 6 ,
 	title : 'new' ,
-	startTime : '3-5' ,
-	endTime : '8-8' ,
+	startTime : {
+		hour: 17,
+		minutes: 5
+	} ,
+	endTime : {
+		hour: 17,
+		minutes: 30
+	} ,
 	reminder : false ,
-	addDate : '2022-09-06'
+	addDate : {
+		year: 2023,
+		month: 2,
+		date: 1
+	}
 }]
 const handleHabitsDataSlice = createSlice({
 	name: 'handleHabitsData',

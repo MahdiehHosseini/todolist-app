@@ -6,7 +6,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				'inter' : ['Inter', 'sans-serif']
+				'rubik' : ['Rubik', 'sans-serif']
 			},
 			fontSize: {
 				'lg-without-lineheigh' : '1.125rem',

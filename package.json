@@ -9,18 +9,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@adobe/react-spectrum": "^3.22.0",
-    "@internationalized/date": "^3.0.1",
-    "@react-spectrum/datepicker": "^3.2.0",
-    "@react-spectrum/provider": "^3.5.2",
+    "@date-io/jalaali": "^2.16.1",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.7",
+    "@mui/styled-engine-sc": "^5.11.0",
+    "@mui/x-date-pickers": "^5.0.17",
     "@reduxjs/toolkit": "^1.8.3",
     "animate.css": "^4.1.1",
-    "bizcharts": "^4.1.7",
+    "date-fns": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "redux-persist": "^6.0.0"
+    "recharts": "^2.3.2",
+    "redux-persist": "^6.0.0",
+    "styled-components": "^5.3.6"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

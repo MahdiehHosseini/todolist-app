@@ -1,60 +1,131 @@
 // import pakages
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 // import types & interfaces
-import { TaskInterface } from './../../types-&-interfaces/Interfaces'
+import { TaskInterface } from '../../Interfaces/Interfaces'
 
 const initialState: TaskInterface[] = [{
 	id : 17 ,
 	title : 'shopping24',
-	startTime : '2-5',
-	endTime : '2-5' ,
+	startTime : {
+		hour: 7 ,
+		minutes: 2
+	},
+	endTime : {
+		hour: 7 ,
+		minutes: 3
+	} ,
 	reminder : true ,
 	autoDone : true ,
-	date : '2022-08-31' ,
+	date : {
+		year: 2023,
+		month: 1,
+		date: 10
+	},
 	listId : 24 ,
 	goalId : 24 ,
 	done : false
 },{
+	id : 44 ,
+	title : 'time' ,
+	startTime : {
+		hour: 8 ,
+		minutes: 15
+	},
+	endTime : {
+		hour: 9 ,
+		minutes: 15
+	} ,
+	reminder : true ,
+	autoDone : true ,
+	date : {
+		year: 2023,
+		month: 2,
+		date: 8
+	}  ,
+	listId : 25 ,
+	goalId : 25 ,
+	done : true
+},{
 	id : 27 ,
 	title : 'first' ,
-	startTime :'2-5',
-	endTime : '2-5' ,
+	startTime : {
+		hour: 8 ,
+		minutes: 15
+	},
+	endTime : {
+		hour: 9 ,
+		minutes: 15
+	} ,
 	reminder : false ,
 	autoDone : true ,
-	date : '2022-09-04' ,
+	date : {
+		year: 2023,
+		month: 1,
+		date: 5
+	}  ,
 	listId : 25 ,
 	goalId : 25 ,
 	done : false
 },{
 	id : 54 ,
 	title : 'seccond' ,
-	startTime : '7-5' ,
-	endTime :'8-5' ,
+	startTime : {
+		hour: 20 ,
+		minutes: 5
+	} ,
+	endTime : {
+		hour: 20 ,
+		minutes: 30
+	} ,
 	reminder : false ,
 	autoDone : true ,
-	date : '2022-09-04' ,
+	date : {
+		year: 2023,
+		month: 1,
+		date: 6
+	}  ,
 	listId : 25 ,
 	goalId : 24 ,
-	done : true},{
+	done : false},{
 	id : 67 ,
 	title : 'shopping25' ,
-	startTime : '3-5',
-	endTime : '4-5' ,
+	startTime : {
+		hour: 7 ,
+		minutes: 2
+	},
+	endTime : {
+		hour: 7 ,
+		minutes: 14
+	} ,
 	reminder : false ,
 	autoDone : true ,
-	date : '2022-08-31' ,
+	date : {
+		year: 2023,
+		month: 1,
+		date: 6
+	}  ,
 	listId : 25 ,
 	goalId : 24 ,
 	done : false},{
 	id : 69 ,
 	title : 'the new' ,
-	startTime : '4-50',
-	endTime : '6-30' ,
+	startTime : {
+		hour: 4 ,
+		minutes: 50
+	},
+	endTime : {
+		hour: 6 ,
+		minutes: 30
+	} ,
 	reminder : true ,
 	autoDone : true ,
-	date : '2022-09-20' ,
+	date : {
+		year: 2023,
+		month: 2,
+		date: 3
+	}  ,
 	listId : 25 ,
-	goalId : 0 ,
+	goalId : 24 ,
 	done : true}]
 const handleTasksDataSlice = createSlice({
 	name: 'handleTasksData',
@@ -84,12 +155,12 @@ const handleTasksDataSlice = createSlice({
 					} 
 					: task)
 		},autoDone : (state:TaskInterface[]) => {
-			state.map(task => 
-				task.autoDone ? 
-					new Date(task.date.split('-').join(',').replace(/"/g, '')).getTime() <= new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()).getTime() &&
-					parseInt(task.endTime.split('-')[0])*60 + parseInt(task.endTime.split('-')[1]) <= (new Date().getHours()*60 + new Date().getMinutes()) ? 
-						{ ...task  , done : true} : task : task
-			)
+			// state.map(task => 
+			// 	task.autoDone ? 
+			// 		new Date(task.date.split('-').join(',').replace(/"/g, '')).getTime() <= new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()).getTime() &&
+			// 		parseInt(task.endTime.split('-')[0])*60 + parseInt(task.endTime.split('-')[1]) <= (new Date().getHours()*60 + new Date().getMinutes()) ? 
+			// 			{ ...task  , done : true} : task : task
+			// )
 		}
 	}
 })

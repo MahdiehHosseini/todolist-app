@@ -5,20 +5,20 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 //import types & interfaces
 import { AppDispatch, RootState } from './store/main'
 //import components
-const HomePage = lazy(() => import('./components/home-page-components/HomePage'))
-const BottomNav = lazy(() => import('./components/main-components/BottomNav'))
-const CalendarPage = lazy(() => import('./components/calendar-page-components/CalendarPage'))
-const SettingPage = lazy(() => import('./components/setting-page-components/SettingPage'))
-const TimeLinePage = lazy(() => import('./components/time-line-page-components/TimeLinePage'))
-const Popups = lazy(() => import('./components/popups-components/Popups'))
-const SingleLIstPage = lazy(() => import('./components/sub-components/SingleListPage'))
-const SingleTaskPage = lazy(() => import('./components/sub-components/SingleTaskPage'))
-const SingleGoalPage = lazy(() => import('./components/sub-components/SingleGoalPage'))
-const SingleHabitPage = lazy(() => import('./components/sub-components/SingleHabitPage'))
-const HabitsPage = lazy(() => import('./components/sub-components/HabitsPage'))
-const GoalsPage = lazy(() => import('./components/sub-components/GoalsPage'))
-const ListsPage = lazy(() => import('./components/sub-components/ListsPage'))
-const NotFoundPage = lazy(() => import('./components/sub-components/NotFoundPage'))
+const HomePage = lazy(() => import('./pages/HomePage'))
+const BottomNav = lazy(() => import('./components/BottomNav'))
+const CalendarPage = lazy(() => import('./pages/CalendarPage'))
+const SettingPage = lazy(() => import('./pages/SettingPage'))
+const TimeLinePage = lazy(() => import('./pages/TimeLinePage'))
+const Popups = lazy(() => import('./components/popups/Popups'))
+const SingleLIstPage = lazy(() => import('./pages/SingleListPage'))
+const SingleTaskPage = lazy(() => import('./pages/SingleTaskPage'))
+const SingleGoalPage = lazy(() => import('./pages/SingleGoalPage'))
+const SingleHabitPage = lazy(() => import('./pages/SingleHabitPage'))
+const HabitsPage = lazy(() => import('./pages/HabitsPage'))
+const GoalsPage = lazy(() => import('./pages/GoalsPage'))
+const ListsPage = lazy(() => import('./pages/ListsPage'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 //import store 
 import { autoDone } from './store/slices/handleTasksDataSlice'
 //import styles
@@ -32,7 +32,7 @@ function App() {
 	} , [])
 	return (
 		<>
-			<div className={`App font-inter relative h-screen ${state !== 'none' && 'overflow-hidden '}`}>
+			<div className={`App font-rubik relative h-screen ${state !== 'none' && 'overflow-hidden '}`}>
 				<Suspense fallback={<></>}>
 					<BrowserRouter>
 						{state !== 'none' && <Popups />}
