@@ -37,7 +37,7 @@ function EditHabitPopup () {
 		<div className="  h-auto pb-14 bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl">
 			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>dispatch(toggleState('none'))} />
 			<ThemeProvider theme={theme}>
-			q<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>edit habit</Typography>
+				<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>edit habit</Typography>
 			</ThemeProvider>
 			<form 
 				className='mx-9 flex flex-col relative h-full'
