@@ -24,7 +24,7 @@ function NotificationsPopup () {
 	})
 	return (
 		<div className=" h-2/3 bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl">
-			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=setState('none')} />
+			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>setState('none')} />
 			<ThemeProvider theme={theme}>
 				<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>notifications</Typography>
 			</ThemeProvider>
