@@ -30,7 +30,7 @@ import 'animate.css'
 function App() {
 	const dispatch = useDispatch<AppDispatch>()
 	const [cookies, setCookie] = useCookies(['appTheme'])
-	const [appTheme, setAppTheme] = useState(cookies.appTheme ? cookies.appTheme : '#F472B6')
+	const [appTheme, setAppTheme] = useState(cookies.appTheme ? cookies.appTheme : '#C084FC')
 	const [state, setState] = useState('none')
 	useEffect(() => {
 		setCookie('appTheme', appTheme, { path: '/' })
