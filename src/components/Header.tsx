@@ -1,18 +1,21 @@
 //import pakages
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext } from 'react'
+import { useDispatch } from 'react-redux'
 //import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import Badge from '@mui/material/Badge'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import Typography from '@mui/material/Typography'
+//import context
+import { ThemeContext, ToggleContext } from '../store/context'
 //import types & interfaces
-import { AppDispatch, RootState } from '../store/main'
-//import store
-import { toggleState } from '../store/slices/toggleSlice'
+import { AppDispatch } from '../store/main'
+
 function Header () {
 	const houre = new Date().getHours()
 	const dispatch = useDispatch<AppDispatch>()
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext)
 	const theme = createTheme({
 		palette: {
 			error: {
@@ -30,7 +33,7 @@ function Header () {
 			</span>
 			<ThemeProvider theme={theme}>
 				<Badge color='error' overlap="circular" badgeContent="" variant="dot">
-					<NotificationsIcon onClick={() => dispatch(toggleState('notifications'))} className='cursor-pointer -mt-1 -mr-1'/>
+					<NotificationsIcon onClick={() => setState('notifications')} className='cursor-pointer -mt-1 -mr-1'/>
 				</Badge>
 			</ThemeProvider>
 		</header>

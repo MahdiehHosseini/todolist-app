@@ -1,13 +1,14 @@
 //import pakages
-import { useSelector } from 'react-redux'
+import React, { useContext } from 'react'
 // import mui components
 import Typography from '@mui/material/Typography'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { TimerComponentInterface } from '../Interfaces/Interfaces'
-import { RootState } from '../store/main'
 
 const TimerSecion = ({time}:TimerComponentInterface) => {
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	return (
 		<span className=" flex justify-center mt-2/3 sm:mt-1/10"> 
 			<div className=" border-zinc-300 border-8 absolute flex justify-center rounded-full">

@@ -1,9 +1,5 @@
 //import pakages
-import {lazy, useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-//import types & interfaces
-import { AppDispatch, RootState } from '../../store/main'
-import { toggleState } from '../../store/slices/toggleSlice'
+import React, {lazy, useContext, useEffect} from 'react'
 //import components
 const AddPopup = lazy(() => import('./add-popups/AddPopup'))
 const AddTaskPopup = lazy(() => import('./add-popups/AddTaskPopup'))
@@ -16,13 +12,14 @@ const EditGoalPopup = lazy(() => import('./edit-popups/EditGoalPopup'))
 const EditHabitPopup = lazy(() => import('./edit-popups/EditHabitPopup'))
 const EditListPopup = lazy(() => import('./edit-popups/EditListPopup'))
 const ThemePopup = lazy(() => import('./ThemePopup'))
+//import context
+import { ToggleContext } from '../../store/context'
 
 function Popups() {
-	const state = useSelector((state:RootState) => state.toggle)
-	const dispatch = useDispatch<AppDispatch>()
+	const { state, setState } = useContext(ToggleContext)
 	useEffect(()=>{
 		document.addEventListener('click',(event)=>{
-			event.target?.id === 'popup' && dispatch(toggleState('none'))
+			event.target?.id === 'popup' && setState('none')
 		})
 	} , [])
 	return (

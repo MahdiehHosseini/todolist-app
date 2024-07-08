@@ -1,6 +1,6 @@
 //import pakages
-import {lazy,useState,useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, {lazy, useState, useEffect, useContext} from 'react'
+import { useDispatch } from 'react-redux'
 // import mui components
 import Typography from '@mui/material/Typography'
 import AddIcon from '@mui/icons-material/Add'
@@ -8,17 +8,18 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 //import components
 const SingleTaskBox = lazy(() => import('../boxes/SingleTaskBox'))
+//import context
+import { ThemeContext, ToggleContext } from '../../store/context'
 //import types & interfaces
 import { TasksListComponentInterface,TaskInterface,TimeInterface } from '../../Interfaces/Interfaces'
-import { AppDispatch, RootState } from '../../store/main'
-//import store
-import { toggleState } from '../../store/slices/toggleSlice'
+import { AppDispatch } from '../../store/main'
 
 const TasksList = ({title ,addOption,tasksData}:TasksListComponentInterface) => {
 	const [showOptions,setShowOptions] = useState<boolean>(false)
 	const [showDoneTasks , setShowDoneTasks] = useState<boolean>(false)
 	const [sortByTime , setSortByTime] = useState<boolean>(false)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext)
 	const dispatch = useDispatch<AppDispatch>()
 	const theme = createTheme({
 		palette: {
@@ -61,7 +62,7 @@ const TasksList = ({title ,addOption,tasksData}:TasksListComponentInterface) => 
 					<ThemeProvider theme={theme}>
 						{addOption && 
 						<AddIcon 
-							onClick={()=>addOption && dispatch(toggleState('addTask'))} 
+							onClick={()=>addOption && setState('addTask')} 
 							fontSize='medium' 
 							color='error'
 							className='cursor-pointer  mt-1'

@@ -1,5 +1,5 @@
 //import pakages
-import { lazy } from 'react'
+import React, { lazy } from 'react'
 //import components
 const SingleHabitBox = lazy(() => import('../boxes/SingleHabitBox'))
 //import types & interfaces

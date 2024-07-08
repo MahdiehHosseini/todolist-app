@@ -1,21 +1,23 @@
 //import pakages
-import { lazy,useState } from 'react'
+import React, { lazy,useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
+//import components
+const SingleHabitBox = lazy(() => import('../components/boxes/SingleHabitBox'))
+const HabitsPageLoaing = lazy(() => import('../components/loading-components/HabitsPageLoading'))
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import FormControl from '@mui/material/FormControl'
 import NativeSelect from '@mui/material/NativeSelect'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState } from '../store/main'
 import { HabitInterface } from '../Interfaces/Interfaces'
-//import components
-const SingleHabitBox = lazy(() => import('../components/boxes/SingleHabitBox'))
-const HabitsPageLoaing = lazy(() => import('../components/loading-components/HabitsPageLoading'))
 
 function HabitsPage() {
 	const [filterValue , setFilterValue] = useState<string>('all')
 	const habits = useSelector((state:RootState) => state.handleHabitsData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const splitTwo = []
 	const sliceIntoChunks = (data:HabitInterface[]) => {
 		for (let i = 0;i < data.length;i += 2) {

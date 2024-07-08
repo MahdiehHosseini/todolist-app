@@ -1,21 +1,23 @@
 //import pakages
-import { lazy,useState } from 'react'
+import React, { lazy,useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
+//import components
+const SingleListBox = lazy(() => import('../components/boxes/SingleListBox'))
+const ListsPageLoading = lazy(() => import('../components/loading-components/ListsPageLoading'))
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import FormControl from '@mui/material/FormControl'
 import NativeSelect from '@mui/material/NativeSelect'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState } from '../store/main'
 import { ListInterface } from '../Interfaces/Interfaces'
-//import components
-const SingleListBox = lazy(() => import('../components/boxes/SingleListBox'))
-const ListsPageLoading = lazy(() => import('../components/loading-components/ListsPageLoading'))
 
 function ListsPage() {
 	const [filterValue , setFilterValue] = useState<string>('all')
 	const lists = useSelector((state:RootState) => state.handleListsData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const splitTwo = []
 	const sliceIntoChunks = (data:ListInterface[]) => {
 		for (let i = 0;i < data.length;i += 2) {

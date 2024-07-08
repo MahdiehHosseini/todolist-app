@@ -1,7 +1,8 @@
 //import pakages
-import {lazy,Suspense, useEffect} from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 //import types & interfaces
 import { AppDispatch, RootState } from './store/main'
 //import components
@@ -19,14 +20,21 @@ const HabitsPage = lazy(() => import('./pages/HabitsPage'))
 const GoalsPage = lazy(() => import('./pages/GoalsPage'))
 const ListsPage = lazy(() => import('./pages/ListsPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+//import context
+import { ThemeContext, ToggleContext } from './store/context'
 //import store 
 import { autoDone } from './store/slices/handleTasksDataSlice'
 //import styles
 import 'animate.css'
 
 function App() {
-	const state = useSelector((state:RootState) => state.toggle)
 	const dispatch = useDispatch<AppDispatch>()
+	const [cookies, setCookie] = useCookies(['appTheme'])
+	const [appTheme, setAppTheme] = useState(cookies.appTheme ? cookies.appTheme : '#F472B6')
+	const [state, setState] = useState('none')
+	useEffect(() => {
+		setCookie('appTheme', appTheme, { path: '/' })
+	}, [appTheme])
 	useEffect(()=>{
 		dispatch(autoDone())
 	} , [])
@@ -35,22 +43,26 @@ function App() {
 			<div className={`App font-rubik relative h-screen ${state !== 'none' && 'overflow-hidden '}`}>
 				<Suspense fallback={<></>}>
 					<BrowserRouter>
-						{state !== 'none' && <Popups />}
-						<Routes>
-							<Route path='/' element={<HomePage />} />
-							<Route path='setting' element={<SettingPage />} />
-							<Route path='time-line' element={<TimeLinePage />} />
-							<Route path='calendar' element={<CalendarPage />} />
-							<Route path='/habits' element={<HabitsPage />} />
-							<Route path='/goals' element={<GoalsPage />} />
-							<Route path='/lists' element={<ListsPage />} />
-							<Route path='lists/:listId' element={<SingleLIstPage />} />
-							<Route path='/tasks/:taskId' element={<SingleTaskPage />} />
-							<Route path='/goals/:goalId' element={<SingleGoalPage />} />
-							<Route path='/habits/:habitId' element={<SingleHabitPage />} />
-							<Route path='/*' element={<NotFoundPage />} />
-						</Routes>
-						<BottomNav />
+						<ThemeContext.Provider value={{appTheme, setAppTheme}}>
+							<ToggleContext.Provider value={{state, setState}}>
+								{state !== 'none' && <Popups />}
+								<Routes>
+									<Route path='/' element={<HomePage />} />
+									<Route path='setting' element={<SettingPage />} />
+									<Route path='time-line' element={<TimeLinePage />} />
+									<Route path='calendar' element={<CalendarPage />} />
+									<Route path='/habits' element={<HabitsPage />} />
+									<Route path='/goals' element={<GoalsPage />} />
+									<Route path='/lists' element={<ListsPage />} />
+									<Route path='lists/:listId' element={<SingleLIstPage />} />
+									<Route path='/tasks/:taskId' element={<SingleTaskPage />} />
+									<Route path='/goals/:goalId' element={<SingleGoalPage />} />
+									<Route path='/habits/:habitId' element={<SingleHabitPage />} />
+									<Route path='/*' element={<NotFoundPage />} />
+								</Routes>
+								<BottomNav />
+							</ToggleContext.Provider>
+						</ThemeContext.Provider>
 					</BrowserRouter>
 				</Suspense>
 			</div>

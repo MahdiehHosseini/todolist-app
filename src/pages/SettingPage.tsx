@@ -1,16 +1,14 @@
 //import pakages
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 //import mui components
 import Typography from '@mui/material/Typography'
-//import types & interfaces
-import { AppDispatch, RootState } from '../store/main'
-//import store
-import { toggleState } from '../store/slices/toggleSlice'
+//import context
+import { ThemeContext, ToggleContext } from '../store/context'
 
 function SettingPage() {
-	const dispatch = useDispatch<AppDispatch>()
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext)
 	return (
 		<>
 			<Typography variant='h6' fontSize='1.25rem' marginY='1rem' align='center'>Setting</Typography>
@@ -28,7 +26,7 @@ function SettingPage() {
 					<hr className={`sm:mx-52 mx-28 border-[${appTheme}] lg:mx-64 xl:mx-96`}></hr>
 				</span>
 				<span>
-					<Typography onClick={()=>dispatch(toggleState('them'))} fontSize='large' variant='body1' marginY='2.25rem' className="cursor-pointer">Themes</Typography>
+					<Typography onClick={()=>setState('them')} fontSize='large' variant='body1' marginY='2.25rem' className="cursor-pointer">Themes</Typography>
 					<hr className={`sm:mx-52 mx-28 border-[${appTheme}] lg:mx-64 xl:mx-96`}></hr>
 				</span>
 			</div>

@@ -1,17 +1,19 @@
 //import pakages
-import { Link,useParams } from 'react-router-dom'
-import { lazy,useState } from 'react'
+import React, { lazy,useState, useContext } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
+import { Link,useParams } from 'react-router-dom'
+//import components
+const TasksList = lazy(() => import('../components/listes/TasksList'))
+const SingleGoalPageLoading = lazy(() => import('../components/loading-components/SingleGoalPageLoading'))
 // import mui components
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { AppDispatch,RootState } from '../store/main'
-//import components
-const TasksList = lazy(() => import('../components/listes/TasksList'))
-const SingleGoalPageLoading = lazy(() => import('../components/loading-components/SingleGoalPageLoading'))
 //import store
 import { toggleTerm , toggleAutoReach } from '../store/slices/handleGoalsDataSlice'
 
@@ -19,7 +21,7 @@ function SingleGoalPage () {
 	const dispatch = useDispatch<AppDispatch>()
 	const goals = useSelector((state:RootState) => state.handleGoalsData)
 	const tasks = useSelector((state:RootState) => state.handleTasksData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const { goalId } = useParams()
 	const theGoal = goals.filter(goal => goal.id === parseFloat(goalId))[0]
 	const theGoalTasks = tasks.filter(task => task.goalId === theGoal.id)

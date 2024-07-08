@@ -126,7 +126,8 @@ const initialState: TaskInterface[] = [{
 	}  ,
 	listId : 25 ,
 	goalId : 24 ,
-	done : true}]
+	done : true
+}]
 const handleTasksDataSlice = createSlice({
 	name: 'handleTasksData',
 	initialState,

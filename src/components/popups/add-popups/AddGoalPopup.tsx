@@ -1,6 +1,6 @@
 //import pakages
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useContext, useState } from 'react'
+import { useDispatch } from 'react-redux'
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
@@ -10,19 +10,21 @@ import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
 import Typography from '@mui/material/Typography'
+//import context
+import { ThemeContext, ToggleContext } from '../../../store/context'
 //import types & interfaces
-import { AppDispatch, RootState } from '../../../store/main'
+import { AppDispatch } from '../../../store/main'
 //import store
-import { toggleState } from '../../../store/slices/toggleSlice'
 import { addGoal } from '../../../store/slices/handleGoalsDataSlice'
 
 function AddGoalPopup () {
 	const [title , setTitle] = useState<string>('')
 	const [autoReach , setAutoReach] = useState<boolean>(false)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
 	const todayDate = new Date()
 	const [date, setDate] = useState(new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate(), 0, 0, 0, 0))
 	const [term , setTerm] = useState<string>('short')
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext) 
 	const dispatch = useDispatch<AppDispatch>()
 	const theme = createTheme({
 		palette: {
@@ -33,7 +35,7 @@ function AddGoalPopup () {
 	})
 	return (
 		<div className=" h-auto text-center bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl pb-12">
-			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>dispatch(toggleState('none'))} />
+			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>setState('none')} />
 			<ThemeProvider theme={theme}>
 				<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>add goal</Typography>
 			</ThemeProvider>

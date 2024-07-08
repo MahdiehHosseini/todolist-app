@@ -1,6 +1,6 @@
 //import pakages
-import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useContext } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
@@ -13,11 +13,13 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
+//import context
+import { ThemeContext, ToggleContext } from '../../../store/context'
 //import types & interfaces
-import { AppDispatch, RootState } from '../../../store/main'
+import { AppDispatch } from '../../../store/main'
 //import store
-import { toggleState } from '../../../store/slices/toggleSlice'
 import { addTask } from '../../../store/slices/handleTasksDataSlice'
+
 function AddTaskPopup () {
 	const dispatch = useDispatch<AppDispatch>()
 	const [title , setTitle] = useState<string>('')
@@ -27,7 +29,8 @@ function AddTaskPopup () {
 	const [endTime , setEndTime] = useState(new Date())
 	const [autoDone , setAutoDone] = useState<boolean>(false)
 	const [reminder , setReminder] = useState<boolean>(false)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext)
 	const url = useLocation().pathname
 	const parentId =  parseFloat(url.split('/')[2])
 	const theme = createTheme({
@@ -39,7 +42,7 @@ function AddTaskPopup () {
 	})
 	return (
 		<div className="  h-auto bg-white w-5/6 lg:w-2/6 md:w-3/6 pb-14 rounded-3xl">
-			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>dispatch(toggleState('none'))} />
+			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>setState('none')} />
 			<ThemeProvider theme={theme}>
 				<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>add task</Typography>
 			</ThemeProvider>

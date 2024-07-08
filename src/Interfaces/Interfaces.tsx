@@ -61,7 +61,8 @@ export interface HabitBoxComponentInterface {
     habitData : HabitInterface
 }
 export interface ListBoxComponentInterface {
-    listData : ListInterface
+    listData : ListInterface,
+    listTasks: TaskInterface[]
 }
 export interface TaskBoxComponentInterface {
     taskData : TaskInterface

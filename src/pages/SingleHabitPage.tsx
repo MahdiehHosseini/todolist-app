@@ -1,22 +1,24 @@
 //import pakages
-import { lazy } from 'react'
+import React, { lazy, useContext } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+//import components
+const TimerSection = lazy(() => import('../components/TimerSection'))
+const SingleHabitPageLoading = lazy(() => import('../components/loading-components/SingleHabitPageLoading'))
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState,AppDispatch } from '../store/main'
 import { toggleReminder } from '../store/slices/handleHabitsDataSlice'
-//import components
-const TimerSection = lazy(() => import('../components/TimerSection'))
-const SingleHabitPageLoading = lazy(() => import('../components/loading-components/SingleHabitPageLoading'))
 
 function SingleHabitPage () {
 	const dispatch = useDispatch<AppDispatch>()
 	const habits = useSelector((state:RootState) => state.handleHabitsData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const { habitId } = useParams()
 	const theHabit = habits.filter(habit => habit.id === parseFloat(habitId))[0]
 	const calculateExistenceTime = ()=>{

@@ -1,6 +1,6 @@
 //import pakages
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 //import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import Fab from '@mui/material/Fab'
@@ -10,14 +10,12 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import HomeIcon from '@mui/icons-material/Home'
 import DateRangeIcon from '@mui/icons-material/DateRange'
 import TimelineIcon from '@mui/icons-material/Timeline'
-//import types & interfaces
-import { AppDispatch, RootState } from '../store/main'
-//import store
-import { toggleState } from '../store/slices/toggleSlice'
+//import context
+import { ThemeContext, ToggleContext } from '../store/context'
 
 function BottomNav () {
-	const dispatch = useDispatch<AppDispatch>()
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { state, setState } = useContext(ToggleContext)
+	const { appTheme } = useContext(ThemeContext)
 	const location = useLocation().pathname
 	const theme = createTheme({
 		palette: {
@@ -36,10 +34,10 @@ function BottomNav () {
 				<ThemeProvider theme={theme}>
 					{/\d/.test(location)
 						
-						? <Fab className=' bottom-10 z-30 cursor-pointer' size="medium" color="error" aria-label="edit" onClick={()=>dispatch(toggleState(`edit${location.split('/')[0] + location.split('/')[1].charAt(0).toUpperCase() + location.split('/')[1].slice(1,-1)}`))}> 
+						? <Fab className=' bottom-10 z-30 cursor-pointer' size="medium" color="error" aria-label="edit" onClick={()=>setState(`edit${location.split('/')[0] + location.split('/')[1].charAt(0).toUpperCase() + location.split('/')[1].slice(1,-1)}`)}> 
 							<EditIcon className='text-white' fontSize='medium' />
 						</Fab>
-						:<Fab className=' bottom-10 z-30 cursor-pointer' size="medium" color="error" aria-label="add" onClick={()=>dispatch(toggleState('add'))}>  
+						:<Fab className=' bottom-10 z-30 cursor-pointer' size="medium" color="error" aria-label="add" onClick={()=>setState('add')}>  
 							<AddIcon className='text-white' fontSize='medium' />
 						</Fab>
 					}

@@ -1,23 +1,26 @@
 //import pakages
-import { lazy } from 'react'
+import React, { lazy, useContext } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+//import components
+const TimerSection = lazy(() => import('../components/TimerSection'))
+const SingleTaskageLoading = lazy(() => import('../components/loading-components/SingleTaskPageLoading'))
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm'
 import TaskAltIcon from '@mui/icons-material/TaskAlt'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { AppDispatch,RootState } from '../store/main'
-//import components
-const TimerSection = lazy(() => import('../components/TimerSection'))
-const SingleTaskageLoading = lazy(() => import('../components/loading-components/SingleTaskPageLoading'))
 //import store
 import { toggleReminder,toggleAutoDone } from '../store/slices/handleTasksDataSlice'
+
 function SingleTaskPage () {
 	const dispatch = useDispatch<AppDispatch>()
 	const tasks = useSelector((state:RootState) => state.handleTasksData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const { taskId } = useParams()
 	const theTask = tasks.filter(task => task.id === parseFloat(taskId))[0]
 	const timeItTakes = (theTask.endTime.hour*60 + theTask.endTime.minutes) - (theTask.startTime.hour*60 + theTask.startTime.minutes)

@@ -1,5 +1,5 @@
 //import pakages
-import { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useDispatch,useSelector } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 // import mui components
@@ -11,14 +11,15 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
+//import context
+import { ThemeContext, ToggleContext } from '../../../store/context'
 //import types & interfaces
 import { AppDispatch,RootState } from '../../../store/main'
 //import store
-import { toggleState } from '../../../store/slices/toggleSlice'
 import { editTask } from '../../../store/slices/handleTasksDataSlice'
+
 function EditTaskPopup () {
 	const dispatch = useDispatch<AppDispatch>()
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
 	const tasks = useSelector((state:RootState) => state.handleTasksData)
 	const url = useLocation().pathname
 	const taskId =  parseInt(url.split('/')[2])
@@ -27,6 +28,8 @@ function EditTaskPopup () {
 	const [date , setDate] = useState(new Date(theTask.date.year, theTask.date.month, theTask.date.date, 0, 0, 0, 0))
 	const [startTime , setStartTime] = useState(new Date())
 	const [endTime , setEndTime] = useState(new Date())
+	const { appTheme } = useContext(ThemeContext)
+	const { state, setState } = useContext(ToggleContext)
 	const theme = createTheme({
 		palette: {
 			error: {
@@ -36,7 +39,7 @@ function EditTaskPopup () {
 	})
 	return (
 		<div className=" h-auto pb-12 bg-white w-5/6 lg:w-2/6 md:w-3/6 rounded-3xl">
-			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>dispatch(toggleState('none'))} />
+			<CloseIcon className='cursor-pointer float-right mt-5 mr-6' fontSize='medium' onClick={()=>setState('none')} />
 			<ThemeProvider theme={theme}>
 				<Typography color='error' marginBottom='1rem' align='center' marginTop='4rem' fontSize='large' fontWeight='500' variant='h6'>edit task</Typography>
 			</ThemeProvider>

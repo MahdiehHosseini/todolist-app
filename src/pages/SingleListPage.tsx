@@ -1,21 +1,23 @@
 //import pakages
-import { Link,useParams } from 'react-router-dom'
-import { lazy,useState } from 'react'
+import React, { lazy,useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
+import { Link,useParams } from 'react-router-dom'
+//import components
+const TasksList = lazy(() => import('../components/listes/TasksList'))
+const SingleListPageLoading = lazy(() => import('../components/loading-components/SingleListPageLoading'))
 // import mui components
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState } from '../store/main'
-//import components
-const TasksList = lazy(() => import('../components/listes/TasksList'))
-const SingleListPageLoading = lazy(() => import('../components/loading-components/SingleListPageLoading'))
 
 function SingleListPage () {
 	const lists = useSelector((state:RootState) => state.handleListsData)
 	const tasks = useSelector((state:RootState) => state.handleTasksData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const { listId } = useParams()
 	const theList = lists.filter(list => list.id === parseFloat(listId))[0]
 	const theListTasks = tasks.filter(task => task.listId === theList.id)

@@ -1,5 +1,5 @@
 //import pakages
-import { lazy, useState } from 'react'
+import React, { lazy, useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
 // import mui components
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
@@ -8,6 +8,8 @@ import NativeSelect from '@mui/material/NativeSelect'
 //import components
 const SingleGoalBox = lazy(() => import('../components/boxes/SingleGoalBox'))
 const GoalsPageLoading = lazy(() => import('../components/loading-components/GoalsPageLoading'))
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState } from '../store/main'
 import { GoalInterface } from '../Interfaces/Interfaces'
@@ -15,7 +17,7 @@ import { GoalInterface } from '../Interfaces/Interfaces'
 function GoalsPage() {
 	const [filterValue , setFilterValue] = useState<string>('all')
 	const goals = useSelector((state:RootState) => state.handleGoalsData)
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const splitTwo = []
 	const sliceIntoChunks = (data:GoalInterface[]) => {
 		for (let i = 0;i < data.length;i += 2) {

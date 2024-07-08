@@ -1,11 +1,13 @@
 //import pakages
-import { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useSelector } from 'react-redux'
 //import mui components
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts'
 import { createTheme, ThemeProvider  } from '@mui/material/styles'
 import FormControl from '@mui/material/FormControl'
 import NativeSelect from '@mui/material/NativeSelect'
+//import context
+import { ThemeContext } from '../store/context'
 //import types & interfaces
 import { RootState } from '../store/main'
 import { TimeLineDataInterFace } from '../Interfaces/Interfaces'
@@ -36,7 +38,7 @@ export default function Chart() {
 		})
 	}
 	setThisMonthChart()
-	const appTheme = useSelector((state:RootState)=> state.handleTheme)
+	const { appTheme } = useContext(ThemeContext)
 	const theme = createTheme({
 		palette: {
 			error: {

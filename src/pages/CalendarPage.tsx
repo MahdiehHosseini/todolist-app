@@ -1,5 +1,5 @@
 // import pakages
-import { lazy } from 'react'
+import React, { lazy } from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 // import mui components
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
